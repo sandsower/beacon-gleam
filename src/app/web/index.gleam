@@ -23,6 +23,6 @@ pub fn handle_request(req: Request, _ctx: Context) -> Response {
   use <- wisp.require_method(req, Get)
 
   service.hello()
-  |> header.component
+  |> header.component()
   |> web.render(200)
 }

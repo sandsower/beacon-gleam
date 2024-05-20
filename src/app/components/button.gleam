@@ -1,14 +1,14 @@
 import nakai/html
-import nakai/html/attrs
+import nakai/attr
 
 pub type Props(a) {
   Props(
     content: String,
     class: String,
-    attrs: List(attrs.Attr(a)),
+    attrs: List(attr.Attr),
   )
 }
 
-pub fn component(props: Props(t)) -> html.Node(t) {
-  html.button_text([attrs.class(props.class), ..props.attrs], props.content)
+pub fn component(props: Props(t)) -> html.Node {
+  html.button_text([attr.class(props.class), ..props.attrs], props.content)
 }

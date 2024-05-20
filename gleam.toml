@@ -17,9 +17,9 @@ gleam_stdlib = "~> 0.34 or ~> 1.0"
 gleam_erlang = "~> 0.25"
 wisp = "~> 0.13"
 mist = "~> 0.17"
-nakai = "~> 0.9"
 gleam_http = "~> 3.6"
 gleam_json = "~> 1.0"
+nakai = ">= 0.10.0 and < 1.0.0"
 
 [dev-dependencies]
 gleeunit = "~> 1.0"

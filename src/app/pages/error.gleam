@@ -1,8 +1,8 @@
 import app/models
 import app/pages/layout
 import app/web.{type Context}
+import nakai/attr
 import nakai/html
-import nakai/html/attrs
 import wisp
 
 fn get_message(code: Int) -> String {
@@ -30,18 +30,18 @@ fn get_subtext(code: Int) -> String {
   }
 }
 
-pub fn page(ctx: Context, req: wisp.Request, code: Int) -> html.Node(t) {
+pub fn page(ctx: Context, req: wisp.Request, code: Int) -> html.Node {
   let message = get_message(code)
 
   html.div(
     [
-      attrs.class(
+      attr.class(
         "min-h-screen flex flex-col text-center items-center justify-center px-6",
       ),
     ],
     [
       html.h1_text(
-        [attrs.class("max-w-2xl text-4xl font-bold mb-3")],
+        [attr.class("max-w-2xl text-4xl font-bold mb-3")],
         get_message(code),
       ),
       html.p_text([], get_subtext(code)),

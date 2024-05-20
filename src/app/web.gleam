@@ -11,7 +11,7 @@ pub type Context {
   )
 }
 
-pub fn render(page: Node(t), code: Int) {
+pub fn render(page: Node, code: Int) {
   page
   |> nakai.to_string_builder
   |> wisp.html_response(code)
