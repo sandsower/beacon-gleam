@@ -2,20 +2,22 @@ import gleam/list
 import nakai/attr
 import nakai/html
 
+fn text(content: String) -> html.Node {
+  html.div([attr.class("text-base text-fuchsia-100")], [html.Text(content)])
+}
+
 fn slide(title: String, content: List(html.Node)) -> html.Node {
-  html.section([], [html.h1([], [html.Text(title)])] |> list.append(content))
+  html.section([], [html.div([attr.class("text-2xl text-fuchsia-500")], [html.Text(title)])] |> list.append(content))
 }
 
 pub fn what_is_gleam() -> html.Node {
   slide("Gleam?", [
-    html.p([], [
       html.div([attr.class("flex-auto flex-col align-start")], [
-        html.div([], [html.Text("Statically-typed")]),
-        html.div([], [html.Text("Functional")]),
-        html.div([], [html.Text("Scalable")]),
-        html.div([], [html.Text("Simple")]),
+        text("Statically-typed"),
+        text("Functional"),
+        text("Scalable"),
+        text("Simple"),
       ]),
-    ]),
   ])
 }
 
@@ -23,10 +25,10 @@ pub fn why_use_gleam() -> html.Node {
   slide("", [
     slide("Why Gleam?", [
       html.div([], [
-        html.div([], [html.Text("Safety")]),
-        html.div([], [html.Text("Simplicity")]),
-        html.div([], [html.Text("Scalability")]),
-        html.div([], [html.Text("Maintainability")]),
+        text("Safety"),
+        text("Simplicity"),
+        text("Single codebase, run everywhere"),
+        text("Maintainability"),
       ]),
     ]),
     slide("Safety", [
