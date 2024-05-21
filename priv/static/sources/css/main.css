@@ -2,3 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .reveal .header {
+    @apply text-8xl text-fuchsia-300 pb-4;
+  }
+  .reveal .cover {
+    @apply text-8xl text-fuchsia-300 pb-8;
+  }
+  .reveal .code {
+    @apply !max-h-full !top-[-3.5rem];
+  }
+  .reveal pre code {
+    @apply !max-h-full !mb-10;
+  }
+}

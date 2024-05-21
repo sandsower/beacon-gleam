@@ -6,18 +6,66 @@ fn text(content: String) -> html.Node {
   html.div([attr.class("text-base text-fuchsia-100")], [html.Text(content)])
 }
 
+fn code(content: String) -> html.Node {
+  html.section([attr.class("code")], [
+    html.pre([attr.class("h-full")], [
+      html.code_text([attr.class("language-gleam")], content),
+    ]),
+  ])
+}
+
 fn slide(title: String, content: List(html.Node)) -> html.Node {
-  html.section([], [html.div([attr.class("text-2xl text-fuchsia-500")], [html.Text(title)])] |> list.append(content))
+  html.section(
+    [],
+    [html.div([attr.class("header")], [html.Text(title)])]
+      |> list.append(content),
+  )
+}
+
+pub fn talking_gleam() -> html.Node {
+  slide("Gleam", [
+    html.div([attr.class("flex-auto flex-col align-start")], [
+      html.img([
+        attr.src("https://gleam.run/images/lucy/lucy.svg"),
+        attr.style("all: initial; height: 18rem; width: 18rem; padding: 3rem;"),
+      ]),
+    ]),
+  ])
 }
 
 pub fn what_is_gleam() -> html.Node {
-  slide("Gleam?", [
+  slide("", [
+    slide("Gleam?", [
       html.div([attr.class("flex-auto flex-col align-start")], [
         text("Statically-typed"),
         text("Functional"),
         text("Scalable"),
         text("Simple"),
       ]),
+    ]),
+    code(
+      "
+  import gleam/json
+  import gleam/result.{try}
+  import my_app/person
+  import wisp.{type Request, type Response}
+
+  pub fn handle_request(req: Request, ctx: Context) -> Response {
+    use json <- wisp.require_json(req)
+
+    let result = {
+      use data <- try(person.decode(json))
+      use row <- try(person.insert(ctx.db, data))
+      Ok(person.to_json(row))
+    }
+
+    case result {
+      Ok(json) -> wisp.json_response(json, 201)
+      Error(_) -> wisp.unprocessable_entity()
+    }
+  }
+    ",
+    ),
   ])
 }
 
@@ -27,36 +75,24 @@ pub fn why_use_gleam() -> html.Node {
       html.div([], [
         text("Safety"),
         text("Simplicity"),
-        text("Single codebase, run everywhere"),
+        text("Single codebase"),
         text("Maintainability"),
       ]),
     ]),
-    slide("Safety", [
-      html.p([], [
-        html.Text(
-          "Gleam's type system catches many common bugs at compile time, reducing the number of runtime errors.",
-        ),
-      ]),
-    ]),
+    slide("Safety", [text("Strict types"), text("No runtime errors")]),
     slide("Simplicity", [
-      html.p([], [
-        html.div([], [html.Text("Small footprint")]),
-        html.div([], [html.Text("C-like syntax, familiar")]),
-      ]),
+      text("Small footprint"),
+      text("C-like syntax, familiar"),
     ]),
-    slide("Single codebase, run everywhere", [
+    slide("Single codebase", [
       html.div([], [
-        html.div([], [html.Text("From db to frontend")]),
-        html.div([], [html.Text("No more context switching")]),
-        html.div([], [html.Text("Compiles to JS and Erlang")]),
+        text("From db to frontend"),
+        text("Compiles to JS and Erlang"),
       ]),
     ]),
     slide("Maintainability", [
-      html.p([], [
-        html.Text(
-          "Gleam's expressive syntax and powerful type system make it easy to understand and refactor code.",
-        ),
-      ]),
+      text("Optimized for readability"),
+      text("Easy to refactor"),
     ]),
   ])
 }
@@ -65,41 +101,23 @@ pub fn the_power_of_the_beam() -> html.Node {
   slide("", [
     slide("Gleam BEAM lean machine", [
       html.div([], [
-        html.div([], [html.Text("Concurrency")]),
-        html.div([], [html.Text("Fault tolerance")]),
-        html.div([], [html.Text("Scalability")]),
+        text("Concurrency"),
+        text("Fault tolerance"),
+        text("Scalability"),
       ]),
     ]),
     slide("Concurrency", [
       html.div([], [
-        html.div([], [html.Text("Run millions of processes concurrently")]),
-        html.div([], [html.Text("Harnesses the power of multi-core CPUs")]),
-        // TODO add image of big companies using BEAM
+        text("Millions of processes concurrently"),
+        text("Harnesses the power of multi-core CPUs"),
       ]),
     ]),
     slide("Fault tolerance", [
-      html.div([], [
-        html.Text(
-          "Recovers from errors and crashes without losing data or stopping the system.",
-        ),
-      ]),
-      html.div([], [
-        html.Text(
-          "Supervision trees make it easy to build self-healing systems.",
-        ),
-      ]),
+      text("Battle tested for over 30 years"),
+      text("Self-healing"),
     ]),
     slide("Scalability", [
-      html.div([], [
-        html.Text(
-          "Recovers from errors and crashes without losing data or stopping the system.",
-        ),
-        html.br([]),
-        html.br([]),
-        html.Text(
-          "Supervision trees make it easy to build self-healing systems.",
-        ),
-      ]),
+      html.div([], [text("Distributed"), text("Hot code swapping")]),
     ]),
   ])
 }
@@ -108,29 +126,30 @@ pub fn healthy_ecosystem() -> html.Node {
   slide("", [
     slide("Ship it!", [
       html.div([], [
-        html.div([], [html.Text("Very healthy ecosystem")]),
-        html.div([], [html.Text("Nice community")]),
-        html.div([], [html.Text("Already a lot of useful libraries")]),
+        text("Very healthy ecosystem"),
+        text("Nice community"),
+        text("Lots of useful libraries"),
       ]),
     ]),
     slide("Lustre", [
       html.div([], [
-        html.div([], [html.Text("Frontend framework")]),
-        html.div([], [html.Text("Inspired by Elm")]),
-        html.div([], [html.Text("Batteries included")]),
+        text("Frontend framework"),
+        text("Inspired by Elm"),
+        text("Batteries included"),
       ]),
     ]),
     slide("Wisp", [
       html.div([], [
-        html.div([], [html.Text("Backend HTTP server")]),
-        html.div([], [html.Text("Simple and fast")]),
-        html.div([], [html.Text("Powerful")]),
+        text("Backend HTTP server"),
+        text("Simple and fast"),
+        text("Powerful"),
       ]),
     ]),
     slide("Fly.io support", [
       html.div([], [
-        html.div([], [html.Text("Easy deployment")]),
-        html.div([], [html.Text("Good support")]),
+        text("Easy deployment"),
+        text("Good support"),
+        text("Painless"),
       ]),
     ]),
   ])

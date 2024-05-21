@@ -1,7 +1,7 @@
 import app/models
 import app/web.{type Context}
-import nakai/html
 import nakai/attr
+import nakai/html
 import wisp
 
 pub type Props {
@@ -34,7 +34,30 @@ pub fn header(title: String) -> html.Node {
       ],
       [],
     ),
-    html.title(title),
+    html.Element(
+      "script",
+      [
+        attr.src(
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
+        ),
+      ],
+      [],
+    ),
+    html.Element(
+      "script",
+      [attr.src("https://gleam.run/javascript/highlightjs-gleam.js")],
+      [],
+    ),
+    html.Element(
+      "link",
+      [
+        attr.rel("stylesheet"),
+        attr.href(
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/felipec.min.css",
+        ),
+      ],
+      [],
+    ),
   ])
 }
 
@@ -52,6 +75,7 @@ pub fn render(child: html.Node, props: Props) -> html.Node {
         attr.id("main"),
         attr.Attr("hx-ext", "response-targets"),
         attr.Attr("hx-boost", "true"),
+        attr.Attr("data-theme", "light"),
       ],
       [
         child,
@@ -59,12 +83,29 @@ pub fn render(child: html.Node, props: Props) -> html.Node {
           "script",
           [
             attr.src(
-              "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js",
+              "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.2/reveal.js",
             ),
           ],
           [],
         ),
-        html.Element("script", [], [html.Text("Reveal.initialize();")]),
+        html.Element(
+          "script",
+          [
+            attr.src(
+              "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.2/plugin/highlight/highlight.min.js",
+            ),
+          ],
+          [],
+        ),
+        html.Element("script", [], [
+          html.Text(
+            "Reveal.initialize({
+                        plugins: [ RevealHighlight ]
+            });
+hljs.highlightAll();
+        ",
+          ),
+        ]),
       ],
     ),
   ])

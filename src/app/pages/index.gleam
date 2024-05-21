@@ -7,6 +7,7 @@ const target = "header"
 pub fn page() -> html.Node {
   div([attr.id(target), attr.class("reveal")], [
     div([attr.class("slides")], [
+      slides.talking_gleam(),
       slides.what_is_gleam(),
       slides.why_use_gleam(),
       slides.the_power_of_the_beam(),
