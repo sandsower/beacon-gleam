@@ -1,6 +1,6 @@
 # Gleam Presentation
 
-This is the code for the presentation given abou Gleam @ Gangverk 2024
+This is the code for the presentation given about Gleam @ Gangverk 2024
 
 ## Project structure
 
