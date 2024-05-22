@@ -83,6 +83,24 @@ pub fn why_use_gleam() -> html.Node {
         text("Compiles to JS and Erlang"),
       ]),
     ]),
+    code(
+      "
+import gleam/io
+
+pub type DateTime
+
+// Depending on the target 
+// the implementation will be different
+
+@external(erlang, \"calendar\", \"local_time\")
+@external(javascript, \"./my_package_ffi.mjs\", \"now\")
+pub fn now() -> DateTime
+
+pub fn main() {
+  io.debug(now())
+}
+    ",
+    ),
     slide("Maintainability", [
       text("Optimized for readability"),
       text("Easy to refactor"),
@@ -161,6 +179,21 @@ pub fn healthy_ecosystem() -> html.Node {
         text("Good support"),
         text("Painless"),
       ]),
+    ]),
+  ])
+}
+
+pub fn resources() {
+  slide("Resources", [
+    html.div([], [
+      text("Gleam website:"),
+      text("https://gleam.run"),
+      html.br([]),
+      text("Exercism Gleam track:"), 
+      text("https://exercism.io/tracks/gleam"),
+      html.br([]),
+      text("CodeCrafters: "),
+      text("https://codecrafters.io"),
     ]),
   ])
 }

@@ -12,6 +12,7 @@ pub fn page() -> html.Node {
       slides.why_use_gleam(),
       slides.the_power_of_the_beam(),
       slides.healthy_ecosystem(),
+      slides.resources(),
       slides.thank_you(),
     ]),
   ])
