@@ -10,7 +10,7 @@
     @apply text-8xl text-fuchsia-300 pb-8;
   }
   .reveal .code {
-    @apply !max-h-full !top-[-3.5rem];
+    @apply !max-h-full !top-[-1.5rem];
   }
   .reveal pre code {
     @apply !max-h-full !mb-10;

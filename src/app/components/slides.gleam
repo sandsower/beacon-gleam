@@ -50,7 +50,7 @@ pub fn what_is_gleam() -> html.Node {
   import my_app/person
   import wisp.{type Request, type Response}
 
-  pub fn handle_request(req: Request, ctx: Context) -> Response {
+  pub fn handle(req: Request, ctx: Context) -> Response {
     use json <- wisp.require_json(req)
 
     let result = {
