@@ -1,6 +1,6 @@
-# Gleam Nakai HTMX Template
+# Gleam Presentation
 
-This is the starting point for a nakai + htmx template with Wisp for the backend, it's setup in a minimal way to get started.
+This is the code for the presentation given abou Gleam @ Gangverk 2024
 
 ## Project structure
 
