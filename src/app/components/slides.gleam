@@ -27,7 +27,7 @@ pub fn talking_gleam() -> html.Node {
     html.div([attr.class("flex-auto flex-col align-start")], [
       html.img([
         attr.src("https://gleam.run/images/lucy/lucy.svg"),
-        attr.style("all: initial; height: 18rem; width: 18rem; padding: 3rem;"),
+        attr.style("all: initial; height: 18rem; width: 18rem; padding: 1rem;"),
       ]),
     ]),
   ])
@@ -35,7 +35,7 @@ pub fn talking_gleam() -> html.Node {
 
 pub fn what_is_gleam() -> html.Node {
   slide("", [
-    slide("Gleam?", [
+    slide("Gleam is...", [
       html.div([attr.class("flex-auto flex-col align-start")], [
         text("Statically-typed"),
         text("Functional"),
@@ -71,14 +71,7 @@ pub fn what_is_gleam() -> html.Node {
 
 pub fn why_use_gleam() -> html.Node {
   slide("", [
-    slide("Why Gleam?", [
-      html.div([], [
-        text("Safety"),
-        text("Simplicity"),
-        text("Single codebase"),
-        text("Maintainability"),
-      ]),
-    ]),
+    slide("Benefits", [html.div([], [])]),
     slide("Safety", [text("Strict types"), text("No runtime errors")]),
     slide("Simplicity", [
       text("Small footprint"),
@@ -94,18 +87,35 @@ pub fn why_use_gleam() -> html.Node {
       text("Optimized for readability"),
       text("Easy to refactor"),
     ]),
+    slide("Fun", [
+      text("Fast feedback loop"),
+      text("Robust pattern matching"),
+      text("Great tooling"),
+    ]),
+    code(
+      "
+pub type ErrorMsg {
+  RetriesFailed(Int)
+  Generic(String)
+  UnexpectedExit()
+}
+
+pub fn process_msg(input: ErrorMsg) {
+  case input {
+    Generic(\"Error: \" <> msg) -> error(msg)
+    RetriesFailed(num) -> 
+         error(\"Retries failed: \" <> num |> int.to_string)
+    _ -> error(\"Unexpected exit\")
+  }
+}
+    ",
+    ),
   ])
 }
 
 pub fn the_power_of_the_beam() -> html.Node {
   slide("", [
-    slide("Gleam BEAM lean machine", [
-      html.div([], [
-        text("Concurrency"),
-        text("Fault tolerance"),
-        text("Scalability"),
-      ]),
-    ]),
+    slide("Gleam BEAM lean machine", [html.div([], [])]),
     slide("Concurrency", [
       html.div([], [
         text("Millions of processes concurrently"),
@@ -145,7 +155,7 @@ pub fn healthy_ecosystem() -> html.Node {
         text("Powerful"),
       ]),
     ]),
-    slide("Fly.io support", [
+    slide("Fly.io", [
       html.div([], [
         text("Easy deployment"),
         text("Good support"),
